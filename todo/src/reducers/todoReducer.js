@@ -1,9 +1,11 @@
+import moment from 'moment'
+
 export const initialState = {
     todoList: [{
         item: 'Learn about reducers',
         completed: false,
-        id: new Date(),
-    },]
+        id: moment().format('MMDDYYYYHHmmss'),
+    }]
 };
 
 export const reducer = (state, action) => {
@@ -17,7 +19,7 @@ export const reducer = (state, action) => {
                         {
                             item: action.payload,
                             completed: false,
-                            id: new Date()
+                            id: moment().format('MMDDYYYYHHmmss')
                         }
                     ]
                 }

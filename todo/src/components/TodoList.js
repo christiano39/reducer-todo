@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import { reducer, initialState } from '../reducers/todoReducer';
+import moment from 'moment'
 
 const TodoList = props => {
     const [newTodoText, setNewTodoText] = useState('');
@@ -13,6 +14,7 @@ const TodoList = props => {
         e.preventDefault();
         dispatch({ type: 'ADD_TODO', payload: newTodoText })
         setNewTodoText('');
+        console.log(moment());
     }
     
     return (
@@ -21,7 +23,7 @@ const TodoList = props => {
                 <ul>
                     {
                         state.todoList.map(todo => {
-                            return <li key={todo.id} onClick={() => dispatch({ type: 'TOGGLE_COMPLETED', payload: todo })} className={todo.completed ? 'completed' : ''}>{todo.item}</li>
+                        return <li key={todo.id} onClick={() => dispatch({ type: 'TOGGLE_COMPLETED', payload: todo })}  className={todo.completed ? 'item completed' : 'item'}>{todo.item} <span className='time-created'>(Created {moment(todo.id, 'MMDDYYYYHHmmss').fromNow()})</span></li>
                         })
                     }
                 </ul>
@@ -34,7 +36,7 @@ const TodoList = props => {
                 />&nbsp;
                 <button>Add</button>
             </form>
-            <button onClick={() => dispatch({ type: 'CLEAR_COMPLETED' })}>Clear completed</button>
+            <button onClick={() => dispatch({ type: 'CLEAR_COMPLETED' })} className='clear-button'>Clear completed</button>
         </div>
     )
 }
