@@ -5,6 +5,7 @@ export const initialState = {
         item: 'Learn about reducers',
         completed: false,
         id: moment().format('MMDDYYYYHHmmss'),
+        //id: '071320201135532'
     }]
 };
 
@@ -32,7 +33,8 @@ export const reducer = (state, action) => {
                     if (itm.id === action.payload.id){
                         return {
                             ...itm,
-                            completed: !itm.completed 
+                            completed: !itm.completed,
+                            timeCompleted: moment().calendar()
                         }
                     }else {
                         return itm

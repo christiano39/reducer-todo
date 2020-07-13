@@ -23,7 +23,17 @@ const TodoList = props => {
                 <ul>
                     {
                         state.todoList.map(todo => {
-                        return <li key={todo.id} onClick={() => dispatch({ type: 'TOGGLE_COMPLETED', payload: todo })}  className={todo.completed ? 'item completed' : 'item'}>{todo.item} <span className='time-created'>(Created {moment(todo.id, 'MMDDYYYYHHmmss').fromNow()})</span></li>
+                            return (
+                                <div key={todo.id}>
+                                <li  
+                                    onClick={() => dispatch({ type: 'TOGGLE_COMPLETED', payload: todo })} 
+                                    className={todo.completed ? 'item completed' : 'item'}
+                                >
+                                    {todo.item} <span className='time-created'>(Created {moment(todo.id, 'MMDDYYYYHHmmss').fromNow()})</span>
+                                </li>
+                                {todo.completed && <span className='time-completed'>(Completed {todo.timeCompleted})</span>}
+                                </div>
+                            )
                         })
                     }
                 </ul>
